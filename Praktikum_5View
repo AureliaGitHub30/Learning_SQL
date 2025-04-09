@@ -1,0 +1,81 @@
+create view praktikum_245150400111019.no1_FakDepProdiStrata
+as 
+select 	f.ID_Fakultas,
+		f.Fakultas,
+		dep.ID_Departemen,
+		dep.Departemen,
+		pd.ID_Program_Studi,
+		pd.Program_Studi,
+		st.ID_Strata,
+		st.Strata
+from praktikum_245150400111019.fakultas f, praktikum_245150400111019.departemen dep, praktikum_245150400111019.program_studi pd, praktikum_245150400111019.strata st 
+
+create view praktikum_245150400111019.no2_matkul3sksgenap as
+select 	mk.KODE_MK,
+		mk.Tahun_Kurikulum,
+		mk.ID_Program_Studi,
+		mk.Nama_MK,
+		mk.SKS_MK,
+		jmk.Tahun_Akademik,
+		jmk.IS_Ganjil,
+		jmk.Kelas
+from praktikum_245150400111019.jadwal_mk jmk
+	inner join 
+	praktikum_245150400111019.mata_kuliah mk
+		on jmk.KODE_MK = mk.KODE_MK
+		and jmk.Tahun_Kurikulum = mk.Tahun_Kurikulum
+		and jmk.ID_Program_Studi = mk.ID_Program_Studi
+where jmk.IS_Ganjil =0
+	and mk.SKS_MK = 3
+	and jmk.Kelas = 'B'
+		
+
+create view praktikum_245150400111019.no3_dosenterbanyak as
+select 	d.NIP,
+		pd.ID_Program_Studi,
+		pd.Program_Studi,
+		count (d.NIP) as Jumlah_Dosen
+from praktikum_245150400111019.dosen d
+	inner join
+	praktikum_245150400111019.program_studi pd
+		on d.ID_Program_studi = pd.ID_Program_Studi
+group by pd.Program_Studi
+order by Jumlah_Dosen desc;
+
+
+create view praktikum_245150400111019.no4_jadwal_ruangan as
+select 	r.ID_Ruang,
+		jk.Kelas,
+		jk.Jam_Mulai,
+		jk.Jam_Selesai,
+		mk.KODE_MK,
+		mk.Tahun_Kurikulum,
+		mk.ID_Program_Studi
+from praktikum_245150400111019.jadwal_kelas jk
+	inner join
+	praktikum_245150400111019.ruang r
+		on jk.ID_ruang = r.ID_ruang
+	inner join
+	praktikum_245150400111019.mata_kuliah mk
+		on jk.KODE_MK = mk.KODE_MK
+		and jk.Tahun_Kurikulum = mk.Tahun_Kurikulum
+		and jk.ID_Program_Studi = mk.ID_Program_Studi
+where jk.kelas = 'B'
+limit 20;
+
+create view praktikum_245150400111019.no5_dosen_kelasB as 
+select distinct
+		pd.ID_Program_Studi,
+		pd.Program_Studi,
+		d.NIP,
+		jd.Kelas,
+		d.Nama as 'Nama Dosen Kelas B'
+from praktikum_245150400111019.dosen d
+	inner join 
+	praktikum_245150400111019.jadwal_dosen jd
+	on jd.NIP = d.NIP
+	inner join
+	praktikum_245150400111019.program_studi pd
+	on d.ID_Program_Studi = pd.ID_Program_Studi
+where jd.kelas = 'B'
+	and pd.program_studi = 'Sistem Informasi';
