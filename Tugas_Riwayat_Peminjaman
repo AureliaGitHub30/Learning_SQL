@@ -1,0 +1,52 @@
+create view tugas_245150400111019.view_transaksi as
+select	a.id_anggota,
+		a.nama as nama_anggota,
+		e.kode_eksemplar,
+		b.judul,
+		pa.nama_pengarang,
+		pb.nama as nama_penerbit, 
+		pb.alamat as tempat_terbit,
+		t.waktu_pinjam,
+		t.waktu_wajib_kembali,
+		t.waktu_kembali,
+		pt.nik as nik_petugas,
+		pt.nama as nama_petugas
+from tugas_245150400111019.transaksi t
+	join tugas_245150400111019.anggota a
+		on t.id_anggota = a.id_anggota
+	join tugas_245150400111019.eksemplar e
+		on t.kode_eksemplar = e.kode_eksemplar
+	join tugas_245150400111019.buku b
+		on e.id_buku = b.id_buku
+	join tugas_245150400111019.pengarang pa
+		on e.kode_eksemplar = pa.kode_eksemplar
+	join tugas_245150400111019.penerbit pb
+		on pb.id_penerbit = b.id_penerbit
+	join tugas_245150400111019.petugas pt
+		on pt.nik = t.nik;
+
+select * from tugas_245150400111019.view_transaksi vt 
+
+create view tugas_245150400111019.InfoRiwayat as
+select 	b.id_buku,
+		b.judul,
+		pg.nama_pengarang,
+		k.kota as tempat_terbit,
+		COUNT (e.kode_eksemplar) as total_riwayat_peminjaman
+from tugas_245150400111019.buku b
+	inner join tugas_245150400111019.penerbit p
+		on b.id_penerbit = p.id_penerbit
+	inner join  tugas_245150400111019.kelurahan kl
+    	on      p.id_kelurahan = kl.id_kelurahan
+    inner join tugas_245150400111019.kecamatan kc
+    	on      kl.id_kecamatan = kc.id_kecamatan
+    inner join tugas_245150400111019.kota k
+    	on      kc.id_kota = k.id_kota
+    inner join tugas_245150400111019.eksemplar e
+    	on      b.id_buku = e.id_buku
+    left join tugas_245150400111019.transaksi t
+    	on      e.kode_eksemplar = t.kode_eksemplar
+    inner join tugas_245150400111019.pengarang pg
+	    on      e.kode_eksemplar = pg.kode_eksemplar
+    group by b.id_buku, pg.nama_pengarang
+    order by total_riwayat_peminjaman desc;
