@@ -1,0 +1,131 @@
+create table PROPINSI(
+	ID_PROPINSI smallint,
+	PROPINSI varchar(15) not null,
+	primary key (ID_PROPINSI)
+);
+create table FAKULTAS(
+	ID_FAKULTAS smallint not null,
+	FAKULTAS VARCHAR(45) not null,
+	primary key (ID_FAKULTAS)
+);
+create table SELEKSI_MASUK(
+	ID_SELEKSI_MASUK smallint,
+	SELEKSI_MASUK VARCHAR(60) not null,
+	primary key(ID_SELEKSI_MASUK)
+);
+create table STRATA(
+	ID_STRATA smallint,
+	STRATA VARCHAR(25) not null,
+	SINGKAT varchar(5) not null,
+	primary key(ID_STRATA)
+);
+
+create table DEPARTEMEN(
+	ID_DEPARTEMEN smallint, 
+	ID_FAKULTAS smallint,
+	DEPARTEMEN VARCHAR(45) not null,
+	primary key (ID_DEPARTEMEN),
+	foreign key (ID_FAKULTAS) references FAKULTAS(ID_FAKULTAS)
+);
+create table PROGRAM_STUDI(
+	ID_PROGRAM_STUDI smallint,
+	ID_STRATA smallint,
+	ID_DEPARTEMEN smallint,
+	PROGRAM_STUDI varchar(45) not null,
+	primary key(ID_PROGRAM_STUDI),
+	foreign key (ID_STRATA) references STRATA(ID_STRATA),
+    foreign key (ID_DEPARTEMEN) references DEPARTEMEN(ID_DEPARTEMEN)
+);
+
+create table KOTA(
+	ID_KOTA smallint,
+	ID_PROPINSI smallint, 
+	KOTA VARCHAR(60) not null,
+	primary key (ID_KOTA),
+	foreign key (ID_PROPINSI) references PROPINSI(ID_PROPINSI)
+);
+create table KECAMATAN(
+	ID_KECAMATAN smallint, 
+	ID_KOTA SMALLINT,
+	KECAMATAN VARCHAR(60) not null,
+	primary key (ID_KECAMATAN),
+	foreign key(ID_KOTA) references KOTA(ID_KOTA)
+);
+create table KELURAHAN(
+	ID_KELURAHAN smallint,
+	ID_KECAMATAN smallint,
+	KELUARAHAN VARCHAR(45) not null,
+	primary KEY(ID_KELURAHAN),
+	foreign key(ID_KECAMATAN) references KECAMATAN(ID_KECAMATAN)
+);
+
+create table ANGGOTA(
+	ID_ANGGOTA varchar(15),
+	ID_SELEKSI_MASUK smallint,
+	ID_PROGRAM_STUDI smallint,
+	NAMA VARCHAR(45) not null,
+	ANGKATAN smallint not null,
+	primary KEY(ID_ANGGOTA),
+	foreign key (ID_SELEKSI_MASUK) references SELEKSI_MASUK(ID_SELEKSI_MASUK),
+    foreign key (ID_PROGRAM_STUDI) references PROGRAM_STUDI(ID_PROGRAM_STUDI)
+);
+create table PENERBIT(
+	ID_PENERBIT smallint,
+	ID_KELURAHAN smallint,
+	NAMA varchar(45) not null,
+	ALAMAT VARCHAR(45) not null,
+	primary KEY(ID_PENERBIT),
+	foreign key (ID_KELURAHAN) references KELURAHAN(ID_KELURAHAN)
+);
+
+create table BUKU(
+	ID_BUKU integer,
+	ID_PENERBIT smallint,
+	JUDUL VARCHAR(100) not null,
+	primary KEY(ID_BUKU),
+	foreign key (ID_PENERBIT) references PENERBIT(ID_PENERBIT)
+);
+create table EKSEMPLAR(
+    KODE_EKSEMPLAR VARCHAR(15),
+    ID_BUKU integer,
+    primary KEY(KODE_EKSEMPLAR),
+    foreign key (ID_BUKU) references BUKU(ID_BUKU)
+);
+create table PENGARANG(
+    ID_PENGARANG VARCHAR(45),
+    KODE_EKSEMPLAR VARCHAR(15),
+    primary KEY(ID_PENGARANG),g
+    foreign key (KODE_EKSEMPLAR) references EKSEMPLAR(KODE_EKSEMPLAR)
+);
+
+
+
+create table PETUGAS(
+    NIK VARCHAR(15),
+    NAMA VARCHAR(45) not null,
+    NO_HP VARCHAR(20) not null,
+    USERNAME VARCHAR(25) not null,
+    PASSWD VARCHAR(256) not null,
+    primary key(NIK)
+);
+
+
+create table TRANSAKSI(
+    KODE_EKSEMPLAR VARCHAR(15),
+    WAKTU_PINJAM TIMESTAMP,
+    NIK VARCHAR(15),
+    ID_ANGGOTA VARCHAR(15),
+    WAKTU_WAJIB_KEMBALI TIMESTAMP not null,
+    WAKTU_KEMBALI TIMESTAMP not null,
+    primary key (KODE_EKSEMPLAR, WAKTU_PINJAM),
+    foreign key (KODE_EKSEMPLAR) references EKSEMPLAR(KODE_EKSEMPLAR),
+    foreign key (NIK) references PETUGAS(NIK),
+    foreign key (ID_ANGGOTA) references ANGGOTA(ID_ANGGOTA)
+);
+
+alter table ANGGOTA
+add column jenis_kelamin char
+
+alter table tugas_245150400111019.anggota 
+add column JENIS_KELAMIN char(1) not null
+CHECK (JENIS_KELAMIN IN ('L', 'P'));
