@@ -1,0 +1,348 @@
+alter table tugas_245150400111019.propinsi 
+modify column propinsi varchar(40);
+
+insert into tugas_245150400111019.propinsi (ID_PROPINSI, PROPINSI) values
+(11, 'Aceh'),
+(12, 'Sumatera Utara'),
+(13, 'Sumatera Barat'),
+(16, 'Sumatera Selatan'),
+(14, 'Riau'),
+(21, 'Kepulauan Riau'),
+(15, 'Jambi'),
+(17, 'Bengkulu'),
+(18, 'Lampung'),
+(19, 'Bangka Belitung'),
+(31, 'DKI Jakarta'),
+(36, 'Banten'),
+(32, 'Jawa Barat'),
+(33, 'Jawa Tengah'),
+(34, 'DI Yogyakarta'),
+(35, 'Jawa Timur'),
+(51, 'Bali'),
+(61, 'Kalimantan Barat'),
+(62, 'Kalimantan Tengah'),
+(63, 'Kalimantan Selatan'),
+(64, 'Kalimantan Timur'),
+(65, 'Kalimantan Utara'),
+(52, 'Nusa Tenggara Barat'),
+(53, 'Nusa Tenggara Timur'),
+(71, 'Sulawesi Utara'),
+(72, 'Sulawesi Tengah'),
+(73, 'Sulawesi Selatan'),
+(74, 'Sulawesi Tenggara'),
+(75, 'Gorontalo'),
+(76, 'Sulawesi Barat'),
+(81, 'Maluku'),
+(82, 'Maluku Utara'),
+(91, 'Papua'),
+(92, 'Papua Barat');
+
+insert into tugas_245150400111019.kota (ID_KOTA, ID_PROPINSI, KOTA) VALUES
+(100, 31, 'Jakarta Pusat'),
+(101, 31, 'Jakarta Utara'),
+(102, 31, 'Jakarta Barat'),
+(103, 31, 'Jakarta Selatan'),
+(104, 31, 'Jakarta Timur'),
+(105, 34, 'Yogyakarta'),
+(106, 32, 'Bogor'),
+(107, 32, 'Sukabumi'),
+(108, 32, 'Bandung'),
+(109, 32, 'Cirebon'),
+(110, 32, 'Bekasi'),
+(111, 32, 'Depok'),
+(112, 32, 'Cimahi'),
+(113, 32, 'Tasikmalaya'),
+(114, 32, 'Banjar'),
+(115, 35, 'Kediri'),
+(116, 35, 'Blitar'),
+(117, 35, 'Malang'),
+(118, 35, 'Probolinggo'),
+(119, 35, 'Pasuruan'),
+(120, 35, 'Mojokerto'),
+(121, 35, 'Madiun'),
+(122, 35, 'Surabaya'),
+(123, 35, 'Batu');
+
+alter table tugas_245150400111019.kecamatan
+modify column kecamatan varchar(50);
+
+insert into tugas_245150400111019.kecamatan (ID_KECAMATAN, ID_KOTA, KECAMATAN) values
+(200, 100, 'Menteng'),         -- Jakarta Pusat
+(201, 101, 'Tanjung Priok'),   -- Jakarta Utara
+(202, 102, 'Grogol Petamburan'), -- Jakarta Barat
+(203, 103, 'Tebet'),           -- Jakarta Selatan
+(204, 104, 'Cakung'),          -- Jakarta Timur
+(205, 105, 'Danurejan'),       -- Yogyakarta
+(206, 106, 'Bogor Tengah'),    -- Bogor
+(207, 107, 'Cikole'),          -- Sukabumi
+(208, 108, 'Coblong'),         -- Bandung
+(209, 109, 'Kejaksan'),        -- Cirebon
+(210, 110, 'Bekasi Selatan'),  -- Bekasi
+(211, 111, 'Beji'),            -- Depok
+(212, 112, 'Cimahi Tengah'),   -- Cimahi
+(213, 113, 'Tawang'),          -- Tasikmalaya
+(214, 114, 'Banjar'),          -- Banjar
+(215, 115, 'Mojoroto'),        -- Kediri
+(216, 116, 'Sananwetan'),      -- Blitar
+(217, 117, 'Klojen'),          -- Malang
+(218, 118, 'Mayangan'),        -- Probolinggo
+(219, 119, 'Panggungrejo'),    -- Pasuruan
+(220, 120, 'Prajurit Kulon'),  -- Mojokerto
+(221, 121, 'Kartoharjo'),      -- Madiun
+(222, 122, 'Tegalsari'),       -- Surabaya
+(223, 123, 'Batu');            -- Batu
+
+alter table tugas_245150400111019.kelurahan
+rename column keluarahan to kelurahan;
+alter table tugas_245150400111019.kelurahan
+modify column kelurahan varchar(50);
+
+insert into tugas_245150400111019.kelurahan (ID_KELURAHAN, ID_KECAMATAN, KELURAHAN) values
+(300, 200, 'Kelurahan Gambir'),      -- Jakarta Pusat
+(301, 201, 'Kelurahan Penjaringan'), -- Jakarta Utara
+(302, 202, 'Kelurahan Grogol'),      -- Jakarta Barat
+(303, 203, 'Kelurahan Tebet'),       -- Jakarta Selatan
+(304, 204, 'Kelurahan Matraman'),    -- Jakarta Timur
+(305, 205, 'Kelurahan Cibinong'),    -- Bogor
+(306, 206, 'Kelurahan Cikole'),      -- Sukabumi
+(307, 207, 'Kelurahan Cihapit'),     -- Bandung
+(308, 208, 'Kelurahan Lemahwungkuk'),-- Cirebon
+(309, 209, 'Kelurahan Duren Jaya'),  -- Bekasi
+(310, 210, 'Kelurahan Mekar Jaya'),  -- Depok
+(311, 211, 'Kelurahan Cibeureum'),   -- Cimahi
+(312, 212, 'Kelurahan Argasari'),    -- Tasikmalaya
+(313, 213, 'Kelurahan Hegarsari'),   -- Banjar
+(314, 214, 'Kelurahan Dagen'),       -- Yogyakarta
+(315, 215, 'Kelurahan Mojoroto'),    -- Kediri
+(316, 216, 'Kelurahan Kepanjen Kidul'), -- Blitar
+(317, 217, 'Kelurahan Klojen'),      -- Malang
+(318, 218, 'Kelurahan Mayangan'),    -- Probolinggo
+(319, 219, 'Kelurahan Panggungrejo'),-- Pasuruan
+(320, 220, 'Kelurahan Prajurit Kulon'), -- Mojokerto
+(321, 221, 'Kelurahan Kartoharjo'),  -- Madiun
+(322, 222, 'Kelurahan Tegalsari'),   -- Surabaya
+(323, 223, 'Kelurahan Sisir');       -- Batu
+
+alter table tugas_245150400111019.penerbit 
+modify column nama varchar(100),
+modify column alamat varchar(250);
+
+insert into tugas_245150400111019.penerbit (ID_PENERBIT, ID_KELURAHAN, NAMA, ALAMAT) values
+(500, 300, 'Penerbit Nusantara', 'Jl. Medan Merdeka No. 1, Kelurahan Gambir, Jakarta Pusat'),
+(501, 301, 'Gramedia Pustaka Utama', 'Jl. Pluit Selatan No. 10, Kelurahan Penjaringan, Jakarta Utara'),
+(502, 302, 'Erlangga', 'Jl. Daan Mogot No. 45, Kelurahan Grogol, Jakarta Barat'),
+(503, 303, 'Balai Pustaka', 'Jl. Casablanca No. 12, Kelurahan Tebet, Jakarta Selatan'),
+(504, 304, 'Pustaka Jaya', 'Jl. Matraman Raya No. 50, Kelurahan Matraman, Jakarta Timur'),
+(505, 305, 'Penerbit Bogor Raya', 'Jl. Tegar Beriman No. 15, Kelurahan Cibinong, Bogor'),
+(506, 306, 'Penerbit Sukabumi', 'Jl. Ahmad Yani No. 8, Kelurahan Cikole, Sukabumi'),
+(507, 307, 'Penerbit Bandung Media', 'Jl. Braga No. 20, Kelurahan Cihapit, Bandung'),
+(508, 308, 'Penerbit Cirebon Sejahtera', 'Jl. Siliwangi No. 5, Kelurahan Lemahwungkuk, Cirebon'),
+(509, 309, 'Bekasi Literasi', 'Jl. Cut Meutia No. 35, Kelurahan Duren Jaya, Bekasi'),
+(510, 310, 'Depok Cendekia', 'Jl. Margonda No. 88, Kelurahan Mekar Jaya, Depok'),
+(511, 311, 'Penerbit Cimahi', 'Jl. Leuwigajah No. 9, Kelurahan Cibeureum, Cimahi'),
+(512, 312, 'Tasik Literasi', 'Jl. KHZ Mustofa No. 30, Kelurahan Argasari, Tasikmalaya'),
+(513, 313, 'Banjar Pustaka', 'Jl. Letjen Suprapto No. 15, Kelurahan Hegarsari, Banjar'),
+(514, 314, 'Penerbit Jogja', 'Jl. Malioboro No. 45, Kelurahan Dagen, Yogyakarta'),
+(515, 315, 'Kediri Media', 'Jl. Brawijaya No. 7, Kelurahan Mojoroto, Kediri'),
+(516, 316, 'Blitar Nusantara', 'Jl. Sudanco Supriyadi No. 13, Kelurahan Kepanjen Kidul, Blitar'),
+(517, 317, 'Penerbit Malang Raya', 'Jl. Kawi No. 22, Kelurahan Klojen, Malang'),
+(518, 318, 'Penerbit Probolinggo', 'Jl. Panglima Sudirman No. 99, Kelurahan Mayangan, Probolinggo'),
+(519, 319, 'Penerbit Pasuruan', 'Jl. Sunan Ampel No. 31, Kelurahan Panggungrejo, Pasuruan'),
+(520, 320, 'Mojokerto Cendekia', 'Jl. Majapahit No. 77, Kelurahan Prajurit Kulon, Mojokerto'),
+(521, 321, 'Madiun Pustaka', 'Jl. Pahlawan No. 18, Kelurahan Kartoharjo, Madiun'),
+(522, 322, 'Surabaya Media', 'Jl. Tunjungan No. 100, Kelurahan Tegalsari, Surabaya'),
+(523, 323, 'Batu Literasi', 'Jl. Diponegoro No. 5, Kelurahan Sisir, Batu');
+
+insert into tugas_245150400111019.fakultas (ID_FAKULTAS, FAKULTAS) values
+(15, 'Ilmu Komputer');
+insert into tugas_245150400111019.strata (ID_STRATA, STRATA, SINGKAT) values
+(5, 'Strata-1', 'S1');
+
+select CONSTRAINT_NAME 
+from information_schema.KEY_COLUMN_USAGE 
+where TABLE_NAME = 'anggota' 
+and COLUMN_NAME = 'ID_SELEKSI_MASUK';
+
+alter table tugas_245150400111019.anggota drop foreign key anggota_ibfk_1;
+alter table tugas_245150400111019.seleksi_masuk modify column ID_SELEKSI_MASUK VARCHAR(4);
+alter table tugas_245150400111019.anggota modify column ID_SELEKSI_MASUK VARCHAR(10);
+
+alter table tugas_245150400111019.anggota  
+add constraint anggota_ibfk_1  
+foreign key (ID_SELEKSI_MASUK)  
+references tugas_245150400111019.seleksi_masuk(ID_SELEKSI_MASUK)  
+on delete CASCADE on update CASCADE;
+
+update tugas_245150400111019.seleksi_masuk 
+set ID_SELEKSI_MASUK = '0111'
+where ID_SELEKSI_MASUK = '111';
+
+insert into tugas_245150400111019.departemen(ID_DEPARTEMEN, ID_FAKULTAS, DEPARTEMEN) values
+(1, 15, 'Sistem Informasi');
+
+select CONSTRAINT_NAME 
+from information_schema.KEY_COLUMN_USAGE 
+where TABLE_NAME = 'anggota' 
+and COLUMN_NAME = 'ID_PROGRAM_STUDI';
+
+alter table tugas_245150400111019.anggota drop foreign key anggota_ibfk_2;
+alter table tugas_245150400111019.program_studi modify column ID_PROGRAM_STUDI varchar(5);
+alter table tugas_245150400111019.anggota modify column ID_PROGRAM_STUDI varchar(5);
+
+ALTER TABLE tugas_245150400111019.anggota  
+ADD CONSTRAINT anggota_ibfk_2  
+FOREIGN KEY (ID_PROGRAM_STUDI)  
+REFERENCES tugas_245150400111019.program_studi(ID_PROGRAM_STUDI)  
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+insert into tugas_245150400111019.seleksi_masuk (ID_SELEKSI_MASUK, SELEKSI_MASUK) values
+('1111', 'Seleksi Nasional Berdasar Prestasi'),
+('0111', 'Seleksi Nasional Berdasar Tes'),
+('7111', 'Seleksi Mandiri');
+
+insert into tugas_245150400111019.program_studi (ID_PROGRAM_STUDI, ID_STRATA, ID_DEPARTEMEN, program_studi) values
+('040', 5, 1, 'Sistem Informasi');
+
+insert into tugas_245150400111019.anggota (ID_ANGGOTA, ID_SELEKSI_MASUK, ID_PROGRAM_STUDI, NAMA, ANGKATAN, JENIS_KELAMIN) values
+('235150401111040', '1111', '040', 'WINDI ADELIA SARI', 23, 'p');
+
+insert into tugas_245150400111019.anggota (ID_ANGGOTA, ID_SELEKSI_MASUK, ID_PROGRAM_STUDI, NAMA, ANGKATAN, JENIS_KELAMIN) values
+('245150400111016', '0111', '040', 'MIFZAL ARIF MAULANA', 24, 'l'),
+('245150400111017', '0111', '040', 'KHARAN NAETHAN NIZAM', 24, 'l'),
+('245150400111018', '0111', '040', 'GRACYELLA EXAUDI GIRSANG', 24, 'p'),
+('245150400111019', '0111', '040', 'AURELIA CAHYA DEWI SALMA', 24, 'p'),
+('245150400111020', '0111', '040', 'MUHAMMAD SYAUQI IMADUDDIN', 24, 'l'),
+('245150400111021', '0111', '040', 'JANICE KUSUMA', 24, 'p'),
+('245150400111022', '0111', '040', 'PUTU ANANDA PREMADI SARI PUTRA', 24, 'l'),
+('245150400111023', '0111', '040', 'ERLANGGA TRI FRASDIANTO', 24, 'l'),
+('245150400111024', '0111', '040', 'FARREL RADITYA', 24, 'l'),
+('245150400111025', '0111', '040', 'NAYLA SALMANDA LUPITA', 24, 'p'),
+('245150400111026', '0111', '040', 'NAUFAL ALDRIN DANITA', 24, 'l'),
+('245150400111027', '0111', '040', 'DANIA PUJIARUM NAFISAH', 24, 'p'),
+('245150400111028', '0111', '040', 'MAYA AUDINA', 24, 'p');
+
+insert into tugas_245150400111019.anggota (ID_ANGGOTA, ID_SELEKSI_MASUK, ID_PROGRAM_STUDI, NAMA, ANGKATAN, JENIS_KELAMIN) values
+('245150401111016', '1111', '040', 'SHEYLA NATASHA RAHMA DITIA', 24, 'p'),
+('245150401111017', '1111', '040', 'VARA VAULINA SAFITRI', 24, 'p'),
+('245150401111018', '1111', '040', 'NADINE CANDRA PRABAWATI', 24, 'p'),
+('245150401111019', '1111', '040', 'INDIRA KUSUMADEWI', 24, 'p'),
+('245150401111020', '1111', '040', 'NADINDA CARISSA ACHSAN', 24, 'p'),
+('245150401111021', '1111', '040', 'NADA HALWA YUANITA', 24, 'p');
+
+insert into tugas_245150400111019.anggota (ID_ANGGOTA, ID_SELEKSI_MASUK, ID_PROGRAM_STUDI, NAMA, ANGKATAN, JENIS_KELAMIN) values
+('245150407111021', '7111', '040', 'NADA HALWA YUANITA', 24, 'p'),
+('245150407111022', '7111', '040', 'GANGSAR WIJAYANTO', 24, 'l'),
+('245150407111023', '7111', '040', 'NAZWA HAFIDZAH', 24, 'p'),
+('245150407111024', '7111', '040', 'RAZZAN AZIZI PUTRA', 24, 'l'),
+('245150407111025', '7111', '040', 'MUHAMMAD ZAKI AL HILMI', 24, 'l'),
+('245150407111026', '7111', '040', 'MUHAMMAD WILDAN RIZALDY', 24, 'l'),
+('245150407111027', '7111', '040', 'MUHAMMAD TENGOKU RAYHANDOKO', 24, 'l'),
+('245150407111028', '7111', '040', 'HANA NAILA IZZAH', 24, 'p'),
+('245150407111029', '7111', '040', 'YANCE ADHY NATA PANJAITAN', 24, 'l'),
+('245150407111030', '7111', '040', 'TUBAGUS FATAHUDIN MULKAN', 24, 'l'),
+('245150407111031', '7111', '040', 'KRESNA WIBOWO PATEBONG', 24, 'l'),
+('245150407111032', '7111', '040', 'FAIRUZ EL FAUZY', 24, 'l'),
+('245150407111033', '7111', '040', 'KINANTI KAYLA MAYVAHRAZ', 24, 'p'),
+('245150407111034', '7111', '040', 'SHAFIYYAH NAJAH WIJAYA', 24, 'p'),
+('245150407111035', '7111', '040', 'AJENG NURUL FAIZAH', 24, 'p'),
+('245150407111036', '7111', '040', 'MUHAMMAD DENNO PRIASMORO', 24, 'l'),
+('245150407111037', '7111', '040', 'MUHAMMAD MURFID KHAROMEN', 24, 'l'),
+('245150407111038', '7111', '040', 'MUHAMMAD ALHAFIZ ARYA WARDHANA', 24, 'l');
+
+insert into tugas_245150400111019.penerbit (id_penerbit, id_kelurahan, nama, alamat) values
+(524, 314, 'Andi', 'Jl. Beo No.38-40, Daerah Istimewa Yogyakarta 55281' );
+
+insert into tugas_245150400111019.buku (ID_BUKU, ID_PENERBIT, JUDUL) values
+(901, 524, 'Kolaborasi PHP 5 dan Mysql Untuk Pengembangan Website'),
+(902, 524, 'Aplikasi Teleakses Perangkat Bergerak'),
+(903, 524, 'Analisis Statistik, Pendekatan Praktis Dengan Microsoft Excel'),
+(904, 524, 'Firebase Membangun Aplikasi Berbasis Android'),
+(905, 524, 'Konsep dan Panduan Aplikatid Basis Data'),
+(906, 524, 'Komputer Grafis, Belajar Elemen Dasar Grafis Menjadi Pro'),
+(907, 524, 'Komputer Audit dan Sekuriti'),
+(908, 524, 'Rumus & Fungsi Terapan Microsoft Excel 2021 untuk Mengolah Data dan Laporan'),
+(909, 524, 'Kupas Tuntas Microsoft Word 365'),
+(910, 524, 'Menguasai T-SQL Query+Programming SQL Server 2008'),
+
+(911, 504, 'Ajar Kutamangu'),
+(912, 504, 'Amanat Dina Napas Panungtungan'),
+(913, 504, 'Angkatan 66 : Prosa dan Puisi'),
+(914, 504, 'Badak Sunda dan Harimau Sunda'),
+(915, 504, 'Balada Orang-orang Tercinta'),
+
+(916, 501, 'Aku yang sudah Lama Hilang'),
+(917, 501, 'Seorang Pria yang Melalui Duka dengan Mencuci Piring'),
+(918, 501, 'Yellowface'),
+(919, 501, 'Menjadi: Seni Membangun Kesadaran tentang Diri dan Sekitar'),
+(920, 501, 'Sukses Memimpin'),
+(921, 501, 'Atomics Habit'),
+(922, 501, 'Another Cooking with Love'),
+(923, 501, 'Buku Minta Disayang'),
+(924, 501, 'The Star and I'),
+(925, 501, 'Selamat Tinggal');
+
+insert into tugas_245150400111019.petugas (NIK, NAMA, NO_HP , USERNAME, PASSWD) values
+('357771122334578', 'Kristian', '081122443631', 'Kristian303', '12345678');
+
+insert into tugas_245150400111019.eksemplar (KODE_EKSEMPLAR, ID_BUKU) values
+('9789792943443', 901),
+('9797631281', 902),
+('9789792931907', 903),
+('9786230108846', 904),
+('9786230142826', 905),
+('9786230102127', 906),
+('9786230135552', 907),
+('9786230139888', 908),
+('9786230140600', 909),
+('9789792907759', 910),
+('9789791606691', 911),
+('9789793631240', 912),
+('9789794193907', 913),
+('9789794193778', 914),
+('9789794195734', 915),
+('9786020678351', 916),
+('9786020674674', 917),
+('9786020672793', 918),
+('9786020664293', 919),
+('9786020311333', 920),
+('9786020633176', 921),
+('9786020660905', 922),
+('9786020650647', 923),
+('9786020649665', 924),
+('9786020647821', 925);
+
+alter table tugas_245150400111019.pengarang change column ID_PENGARANG NAMA_PENGARANG varchar(255);
+
+insert into tugas_245150400111019.pengarang (KODE_EKSEMPLAR, NAMA_PENGARANG) values
+('9789792943443', 'Eko Priyo Utomo '),
+('9797631281', 'A. Sjamsjiar Rahman'),
+('9789792931907', 'Suliyanto'),
+('9786230108846', 'Rosyana Fitria'),
+('9786230142826', 'Abdul Kadir'),
+('9786230102127', 'Tonny Hidayat'),
+('9786230135552', 'IBISA'),
+('9786230139888', 'Madcoms'),
+('9786230140600', 'Handoko Budi Setyo'),
+('9789792907759', 'Aryo Nugroho'),
+('9789791606691', 'Yoseph Iskandar'),
+('9789793631240', 'Mh. Rustandi Kartakusumah'),
+('9789794193907', 'H. B. Jassin'),
+('9789794193778', 'Ajip Rosidi'),
+('9789794195734', 'Rendra'),
+('9786020678351', 'Nago Tejena'),
+('9786020674674', 'dr. Andreas Kurniawan, SP.KJ'),
+('9786020672793', 'R. F. Kuang'),
+('9786020664293', 'Afutami'),
+('9786020311333', 'Dale Carneige and Associates'),
+('9786020633176', 'James Clear'),
+('9786020660905', 'Icha Irawan'),
+('9786020650647', 'Rintik Sendu'),
+('9786020649665', 'M. Aan Mansyur'),
+('9786020647821', 'Tere Liye');
+
+insert into tugas_245150400111019.transaksi  (ID_ANGGOTA, KODE_EKSEMPLAR, WAKTU_PINJAM, nik, WAKTU_WAJIB_KEMBALI, WAKTU_KEMBALI) values
+('245150407111021','9786230140600', '2025-02-10', '357771122334578', '2025-05-10', '2025-05-10' ),
+('245150407111022','9789792931907', '2025-02-10', '357771122334578', '2025-05-10', '2025-05-10' ),
+('245150407111023','9786230108846', '2025-02-10', '357771122334578', '2025-05-10', '2025-05-10' ),
+('245150407111024','9786230142826', '2025-03-10', '357771122334578', '2025-06-10', '2025-05-10' ),
+('245150407111025','9786230135552', '2025-03-10', '357771122334578', '2025-06-10', '2025-05-10' );
