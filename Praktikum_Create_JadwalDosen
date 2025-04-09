@@ -1,0 +1,96 @@
+create table praktikum_245150400111019.Fakultas (
+  ID_Fakultas smallint not null,
+  Fakultas varchar(50),
+  primary key (ID_Fakultas)
+);
+CREATE TABLE praktikum_245150400111019.Departemen (
+  ID_Departemen smallint NOT NULL,
+  ID_Fakultas smallint NOT NULL,
+  Departemen varchar(50),
+  PRIMARY key (ID_Departemen),
+  FOREIGN key (ID_Fakultas) REFERENCES praktikum_245150400111019.Fakultas(ID_Fakultas)
+);
+CREATE TABLE praktikum_245150400111019.Strata (
+  ID_Strata smallint NOT NULL,
+  Strata VARCHAR(10),
+  PRIMARY KEY(ID_Strata)
+);
+
+CREATE TABLE praktikum_245150400111019.Program_Studi (
+  ID_Program_Studi smallint NOT NULL,
+  ID_Strata smallint NOT NULL,
+  ID_Departemen smallint NOT NULL,
+  Program_Studi varchar(50),
+  PRIMARY key (ID_Program_Studi),
+  FOREIGN key (ID_Departemen) REFERENCES praktikum_245150400111019.Departemen(ID_Departemen),
+  FOREIGN key (ID_Strata) REFERENCES praktikum_245150400111019.Strata(ID_Strata)
+);
+
+CREATE TABLE praktikum_245150400111019.Mata_Kuliah (
+  KODE_MK VARCHAR(8) NOT NULL,
+  Tahun_Kurikulum smallint NOT NULL,
+  ID_Program_Studi smallint NOT NULL,
+  Nama_MK varchar(60),
+  SKS_MK SMALLINT,
+  PRIMARY KEY(KODE_MK, Tahun_Kurikulum, ID_Program_Studi),
+  FOREIGN KEY(ID_Program_Studi) REFERENCES praktikum_245150400111019.Program_Studi(ID_Program_Studi)
+);
+CREATE TABLE praktikum_245150400111019.Jadwal_MK (
+  Tahun_Kurikulum smallint NOT NULL,
+  ID_Program_Studi smallint NOT NULL,
+  KODE_MK VARCHAR(8) NOT NULL,
+  Tahun_Akademik SMALLINT NOT NULL,
+  IS_Ganjil BOOL NOT NULL,
+  Kelas VARCHAR(3) NOT NULL,
+  Maks_Peserta SMALLINT,
+  IS_Reguler BOOL,
+  PRIMARY KEY(Tahun_Kurikulum, ID_Program_Studi, IS_Ganjil, Tahun_Akademik, Kelas, KODE_MK),
+  FOREIGN KEY(KODE_MK, Tahun_Kurikulum, ID_Program_Studi) REFERENCES praktikum_245150400111019.Mata_Kuliah( KODE_MK, Tahun_Kurikulum, ID_Program_Studi)
+);
+
+create table praktikum_245150400111019.Dosen(
+	NIP VARCHAR(10) NOT NULL,
+  	ID_Program_Studi smallint NOT NULL,
+  	Nama VARCHAR(60),
+  	PRIMARY KEY(NIP),
+  	FOREIGN KEY(ID_Program_Studi) REFERENCES praktikum_245150400111019.Program_Studi(ID_Program_Studi)
+);
+create table praktikum_245150400111019.Jadwal_Dosen(
+	Kelas VARCHAR(3) NOT NULL,
+  	Tahun_Akademik SMALLINT NOT NULL,
+  	IS_Ganjil BOOL NOT NULL,
+  	ID_Program_Studi smallint NOT NULL,
+  	Tahun_Kurikulum SMALLINT NOT NULL,
+  	NIP VARCHAR(10) NOT NULL,
+  	IS_Ketua bool,
+  	PRIMARY KEY(Kelas, Tahun_Akademik, IS_Ganjil, ID_Program_Studi, Tahun_Kurikulum, NIP),
+  	FOREIGN KEY(Tahun_Kurikulum, ID_Program_Studi, IS_Ganjil, Tahun_Akademik, Kelas) REFERENCES praktikum_245150400111019.Jadwal_MK(Tahun_Kurikulum, ID_Program_Studi, IS_Ganjil, Tahun_Akademik, Kelas),
+  	FOREIGN KEY(NIP) REFERENCES praktikum_245150400111019.Dosen(NIP)
+);
+
+create table praktikum_245150400111019.Ruang(
+	ID_Ruang SMALLINT NOT NULL,
+  	Ruang VARCHAR(10),
+  	Kapasitas_Ruang SMALLINT,
+  	PRIMARY KEY(ID_Ruang)
+);
+
+create table praktikum_245150400111019.Jadwal_Kelas(
+	KODE_MK VARCHAR(8) NOT NULL,
+	Tahun_Kurikulum SMALLINT NOT NULL,
+	ID_Program_Studi smallint NOT NULL,
+	Tahun_Akademik SMALLINT NOT NULL,
+	IS_Ganjil BOOL NOT NULL,
+	Hari_Ke SMALLINT NOT NULL,
+	Kelas VARCHAR(3) NOT NULL,
+	Jam_Mulai TIME NOT NULL,
+	ID_Ruang SMALLINT NOT NULL,
+	Jam_Selesai TIME,
+	SKS_Jadwal SMALLINT,
+	PRIMARY KEY(KODE_MK, Tahun_Kurikulum, ID_Program_Studi, Tahun_Akademik, IS_Ganjil, Hari_Ke, Kelas, Jam_Mulai),
+	FOREIGN KEY(Tahun_Kurikulum, ID_Program_Studi, IS_Ganjil, Tahun_Akademik, Kelas, KODE_MK) REFERENCES praktikum_245150400111019.Jadwal_MK(Tahun_Kurikulum, ID_Program_Studi, IS_Ganjil, Tahun_Akademik, Kelas, KODE_MK),
+	FOREIGN KEY(ID_Ruang) REFERENCES praktikum_245150400111019.Ruang(ID_Ruang)
+);
+
+alter table praktikum_245150400111019.Jadwal_Kelas 
+add constraint Hari_Ke check (Hari_Ke >0 and Hari_Ke <6);
