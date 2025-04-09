@@ -1,0 +1,89 @@
+create view tugas_245150400111019.buku_tidak_laku_left as
+select 	b.id_buku,
+		b.judul,
+		p.nama as nama_penerbit,
+		p.alamat as tempat_terbit,
+		pa.nama_pengarang
+from tugas_245150400111019.buku b
+	join tugas_245150400111019.penerbit p 
+		on b.id_penerbit = p.ID_PENERBIT
+	join tugas_245150400111019.eksemplar e 
+		on b.ID_BUKU = e.ID_BUKU 
+	left join tugas_245150400111019.transaksi t 
+		on e.KODE_EKSEMPLAR = t.KODE_EKSEMPLAR
+	left join tugas_245150400111019.pengarang pa
+		on e.KODE_EKSEMPLAR = pa.KODE_EKSEMPLAR
+where t.KODE_EKSEMPLAR is null
+group by b.id_buku, b.judul, pa.nama_pengarang, p.nama, p.alamat;
+
+select*from tugas_245150400111019.buku_tidak_laku_left
+
+create view tugas_245150400111019.buku_tidak_laku_right as
+select 	b.id_buku,
+		b.judul,
+		p.nama as nama_penerbit,
+		p.alamat as tempat_terbit,
+		pa.nama_pengarang
+from tugas_245150400111019.transaksi t
+	right join tugas_245150400111019.eksemplar e
+		on t.KODE_EKSEMPLAR = e.KODE_EKSEMPLAR
+		inner join tugas_245150400111019.buku b 
+		on e.ID_BUKU = b.ID_BUKU 
+	inner join tugas_245150400111019.penerbit p 
+		on b.id_penerbit = p.ID_PENERBIT
+	inner join tugas_245150400111019.pengarang pa
+		on e.kode_eksemplar = pa.kode_eksemplar
+where t.kode_eksemplar is null
+group by b.id_buku, b.judul, pa.nama_pengarang, p.nama, p.alamat;
+
+select*from tugas_245150400111019.buku_tidak_laku_right
+
+create view tugas_245150400111019.mahasiswa_tidak_pernah_pinjam_left as
+select 	a.id_anggota,
+		a.nama as Nama_mahasiswa,
+		ps.program_studi,
+		d.departemen,
+		f.fakultas,
+		s.singkat as Strata,
+		sm.seleksi_masuk
+from tugas_245150400111019.anggota a
+	left join tugas_245150400111019.transaksi t
+		on a.id_anggota = t.id_anggota
+	inner join tugas_245150400111019.program_studi ps 
+		on a.ID_PROGRAM_STUDI = ps.ID_PROGRAM_STUDI
+	inner join tugas_245150400111019.departemen d 
+		on ps.id_departemen = d.ID_DEPARTEMEN
+	inner join tugas_245150400111019.fakultas f 
+		on d.ID_FAKULTAS = f.ID_FAKULTAS
+	inner join tugas_245150400111019.strata s 
+		on ps.ID_STRATA = s.ID_STRATA
+	inner join tugas_245150400111019.seleksi_masuk sm 
+		on a.ID_SELEKSI_MASUK = sm.ID_SELEKSI_MASUK
+where t.id_anggota is null
+order by a.id_anggota;
+
+select*from tugas_245150400111019.mahasiswa_tidak_pernah_pinjam_left
+
+create view tugas_245150400111019.mahasiswa_tidak_pernah_pinjam_right as
+select	a.id_anggota,
+		a.nama as Nama_mahasiswa,
+		ps.program_studi,
+		d.departemen,
+		f.fakultas,
+		s.singkat as Strata,
+		sm.seleksi_masuk
+from tugas_245150400111019.transaksi t
+	right join tugas_245150400111019.anggota a
+		on t.id_anggota = a.id_anggota
+	inner join tugas_245150400111019.program_studi ps 
+		on a.ID_PROGRAM_STUDI = ps.ID_PROGRAM_STUDI
+	inner join tugas_245150400111019.departemen d 
+		on ps.id_departemen = d.ID_DEPARTEMEN
+	inner join tugas_245150400111019.fakultas f 
+		on d.ID_FAKULTAS = f.ID_FAKULTAS
+	inner join tugas_245150400111019.strata s 
+		on ps.ID_STRATA = s.ID_STRATA
+	inner join tugas_245150400111019.seleksi_masuk sm 
+		on a.ID_SELEKSI_MASUK = sm.ID_SELEKSI_MASUK
+where t.id_anggota is null
+order by a.id_anggota;
