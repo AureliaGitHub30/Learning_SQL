@@ -1,0 +1,84 @@
+
+use database utp_245150400111019
+create table utp_245150400111019.produk (
+	id_produk int not null,
+	nama_produk varchar(60),
+	harga decimal,
+	primary key(id_produk)
+);
+
+create table utp_245150400111019.pelanggan (
+	id_pelanggan int not null,
+	nama varchar(100),
+	email varchar(100),
+	primary key(id_pelanggan)
+);
+
+create table utp_245150400111019.Pesanan(
+	id_pesanan int not null,
+	id_produk int not null,
+	id_pelanggan int not null,
+	jumlah int,
+	tanggal_pesan date,
+	primary key(id_pesanan),
+	foreign key(id_produk) references utp_245150400111019.produk(id_produk),
+	foreign key(id_pelanggan) references utp_245150400111019.pelanggan(id_pelanggan)
+);
+
+create table utp_245150400111019.pembayaran(
+	id_pembayaran int not null,
+	id_pesanan int not null,
+	metode varchar(100),
+	status_2 varchar(100),
+	tanggal_bayar date,
+	primary key(id_pembayaran),
+	foreign key(id_pesanan) references utp_245150400111019.pesanan(id_pesanan)
+);
+
+
+create view view_no2 as
+select 	po.nama_produk,
+		po.harga,
+		pe.nama
+from utp_245150400111019.produk po
+	join utp_245150400111019.pesanan ps
+		on po.id_produk=ps.id_produk
+	join  utp_245150400111019.pelanggan pe
+		on ps.id_pelanggan = pe.id_pelanggan
+where harga > 200000
+group by nama_produk;
+
+create view view_no3 as
+select 	pe.nama,
+		po.nama_produk,
+		py.metode as metode_pembayaran,
+		py.status_2 as status_pesanan
+from utp_245150400111019.pelanggan pe
+	join utp_245150400111019.pesanan ps
+		on pe.id_pelanggan = ps.id_pelanggan
+	join  utp_245150400111019.produk po
+		on po.id_produk = ps.id_produk
+	join utp_245150400111019.pembayaran py
+		on ps.id_pesanan = py.id_pesanan
+		
+create view view_no4 as
+select tanggal_pesan from utp_245150400111019.pesanan pe
+union
+select tanggal_bayar from utp_245150400111019.pembayaran py;
+
+
+
+create view_no5 as
+select 
+
+create view view_no5 as
+select 	pe.nama,
+		po.nama_produk,
+		po.harga
+from utp_245150400111019.pelanggan pe
+	join utp_245150400111019.pesanan ps
+		on pe.id_pelanggan = ps.id_pelanggan
+	join utp_245150400111019.produk po
+		on po.id_produk = ps.id_produk
+where harga > (	select harga from  produk
+				where harga = 100000);
