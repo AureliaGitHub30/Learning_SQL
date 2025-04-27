@@ -1,0 +1,35 @@
+DELIMITER //
+create procedure sqlruang_baca.hitungMahasiswaProdi (
+	in namaProdi varchar(60),
+	out jumlahMahasiswa int
+)
+begin 
+	select 	count(*) into jumlahMahasiswa
+	from sqlruang_baca. anggota a
+	join sqlruang_baca.program_studi ps 
+		on a.ID_PROGRAM_STUDI = ps.ID_PROGRAM_STUDI
+	where ps.program_studi = namaProdi;
+end //
+DELIMITER ;
+
+CALL sqlruang_baca.hitungMahasiswaProdi('Sistem Informasi', @jumlah);
+SELECT @jumlah
+
+
+DELIMITER //
+create procedure sqlruang_baca.cekMahasiswaBerprestasi (
+	in namaProdi varchar(60)
+)
+begin
+	declare jumlahMahasiswa INT DEFAULT 0;
+
+	select 	count(*) into jumlahMahasiswa
+	from sqlruang_baca. anggota a
+	join sqlruang_baca.program_studi ps 
+		on a.ID_PROGRAM_STUDI = ps.ID_PROGRAM_STUDI
+	where ps.program_studi = namaProdi
+      and a.IPK >= 3.5;
+	select jumlahMahasiswa as jumlah_mahasiswa_berprestasi;
+end //
+DELIMITER ;
+CALL sqlruang_baca.cekMahasiswaBerprestasi('Sistem Informasi');
